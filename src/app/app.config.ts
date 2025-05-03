@@ -1,5 +1,5 @@
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { initializeApp, initializeServerApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth, getAuth, connectAuthEmulator } from '@angular/fire/auth';
 import { provideFirestore, getFirestore, connectFirestoreEmulator } from '@angular/fire/firestore';
@@ -11,14 +11,12 @@ import { provideRouter } from '@angular/router';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    importProvidersFrom(
       provideFirebaseApp(() => initializeApp(environment.firebase)),
       provideFirestore(() => getFirestore()),
       provideAuth(() => getAuth()),
       provideFunctions(() => getFunctions()),
       provideStorage(() => getStorage()),
-      provideMessaging(() => getMessaging())
-    ),
+      provideMessaging(() => getMessaging()),
     provideRouter(routes)
   ],
 };
